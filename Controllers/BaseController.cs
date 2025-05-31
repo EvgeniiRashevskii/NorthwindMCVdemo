@@ -11,9 +11,21 @@ namespace NorthwindMCVdemo.Controllers
         // GET: Base
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (Session["UserName"] == null)
+            string action = filterContext.ActionDescriptor.ActionName.ToLower();
+            string controller = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower();
+
+            // Разрешённый доступ без входа:
+            bool isLoginAllowed =
+                (controller == "home" && (action == "login" || action == "authorize")) ||
+                (controller == "logins" && action == "create");
+
+            if (!isLoginAllowed && Session["UserName"] == null)
             {
-                filterContext.Result = RedirectToAction("Login", "Logins");
+                filterContext.Result = new RedirectToRouteResult(
+                    new System.Web.Routing.RouteValueDictionary(
+                        new { controller = "Home", action = "Login" }
+                    )
+                );
             }
 
             base.OnActionExecuting(filterContext);
