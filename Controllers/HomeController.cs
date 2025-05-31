@@ -7,7 +7,7 @@ using NorthwindMCVdemo.Models;
 
 namespace NorthwindMCVdemo.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Login()
         {
@@ -48,41 +48,22 @@ namespace NorthwindMCVdemo.Controllers
         }
         public ActionResult Index()
         {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             ViewBag.LoggedStatus = "In";
             return View();
         }
 
         public ActionResult About()
         {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("login", "home");
-            }
-            else
-            {
-                ViewBag.Message = "Yhtiön Perustietojen kuvailua";
-                ViewBag.Herja = "Ole huolellinen, niin ei tule virhettä";
-                return View();
-            }            
+            ViewBag.Message = "Yhtiön Perustietojen kuvailua";
+            ViewBag.Herja = "Ole huolellinen, niin ei tule virhettä";
+            return View();
         }
 
         public ActionResult Contact()
         {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("login", "home");
-            }
-            else
-            {
-                ViewBag.Message = "Yhteystietojamme";
-                ViewBag.Herja = Session["UserName"];
-                return View();
-            }
+            ViewBag.Message = "Yhteystietojamme";
+            ViewBag.Herja = Session["UserName"];
+            return View();
         }
     }
 }
