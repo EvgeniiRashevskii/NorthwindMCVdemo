@@ -10,7 +10,7 @@ using NorthwindMCVdemo.Models;
 
 namespace NorthwindMCVdemo.Controllers
 {
-    public class LoginsController : Controller
+    public class LoginsController : BaseController
     {
         private TilausDB3Entities2 db = new TilausDB3Entities2();
 
