@@ -65,5 +65,10 @@ namespace NorthwindMCVdemo.Controllers
             ViewBag.Herja = Session["UserName"];
             return View();
         }
+
+        public ActionResult Map()
+        {
+            return View();
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace NorthwindMCVdemo.Controllers
             string action = filterContext.ActionDescriptor.ActionName.ToLower();
             string controller = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower();
 
-            // Разрешённый доступ без входа:
             bool isLoginAllowed =
                 (controller == "home" && (action == "login" || action == "authorize")) ||
                 (controller == "logins" && action == "create");
