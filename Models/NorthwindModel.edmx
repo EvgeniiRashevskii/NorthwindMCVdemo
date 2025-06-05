@@ -48,6 +48,15 @@ warning 6002: The table/view 'TilausDB3.dbo.Categories' does not have a primary 
           <Property Name="Picture" Type="image" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'TilausDB3.dbo.CustomerDemographics' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CustomerDemographics">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CustomerDesc" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'TilausDB3.dbo.Customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Customers">
           <Key>
@@ -291,6 +300,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Product Sales for 1997' does not hav
           <Property Name="ShipperID" Type="int" Nullable="false" />
           <Property Name="UnitPrice" Type="decimal" Precision="9" Scale="2" />
           <Property Name="UnitsInStock" Type="smallint" />
+          <Property Name="Img" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TilausDB3.dbo.Products Above Average Price' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -315,6 +325,14 @@ warning 6002: The table/view 'TilausDB3.dbo.Products by Category' does not have 
           <Property Name="UnitsInStock" Type="smallint" />
           <Property Name="Discontinued" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TilausDB3.dbo.Quarterly Orders' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Quarterly Orders">
+          <Property Name="CustomerID" Type="nchar" MaxLength="5" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="40" />
+          <Property Name="City" Type="nvarchar" MaxLength="15" />
+          <Property Name="Country" Type="nvarchar" MaxLength="15" />
+        </EntityType>-->
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionID" />
@@ -556,6 +574,12 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
     [Categories].[Description] AS [Description], 
     [Categories].[Picture] AS [Picture]
     FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CustomerDemographics].[CustomerTypeID] AS [CustomerTypeID], 
+    [CustomerDemographics].[CustomerDesc] AS [CustomerDesc]
+    FROM [dbo].[CustomerDemographics] AS [CustomerDemographics]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -862,6 +886,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
           <EntitySet Name="Products" EntityType="TilausDB3Model.Products" />
+          <EntitySet Name="CustomerDemographics" EntityType="TilausDB3Model.CustomerDemographics" />
           <AssociationSet Name="FK__Products__Shippe__0B5CAFEA" Association="TilausDB3Model.FK__Products__Shippe__0B5CAFEA">
             <End Role="Shippers" EntitySet="Shippers" />
             <End Role="Products" EntitySet="Products" />
@@ -1344,7 +1369,15 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="ShipperID" Type="Int32" Nullable="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="UnitsInStock" Type="Int16" />
+          <Property Name="Img" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Shippers" Relationship="TilausDB3Model.FK__Products__Shippe__0B5CAFEA" FromRole="Products" ToRole="Shippers" />
+        </EntityType>
+        <EntityType Name="CustomerDemographics">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CustomerDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Products__Shippe__0B5CAFEA">
           <End Type="TilausDB3Model.Shippers" Role="Shippers" Multiplicity="1" />
@@ -1745,11 +1778,20 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="TilausDB3Model.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerDemographics">
+            <EntityTypeMapping TypeName="TilausDB3Model.CustomerDemographics">
+              <MappingFragment StoreEntitySet="CustomerDemographics">
+                <ScalarProperty Name="CustomerDesc" ColumnName="CustomerDesc" />
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

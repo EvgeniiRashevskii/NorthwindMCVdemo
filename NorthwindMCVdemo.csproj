@@ -138,6 +138,9 @@
     <Compile Include="Models\Categories.cs">
       <DependentUpon>NorthwindModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerDemographics.cs">
+      <DependentUpon>NorthwindModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customers.cs">
       <DependentUpon>NorthwindModel.tt</DependentUpon>
     </Compile>

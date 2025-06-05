@@ -56,5 +56,6 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
     }
 }
