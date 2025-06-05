@@ -47,7 +47,6 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Orders_Qry> Orders_Qry { get; set; }
         public virtual DbSet<Product_Sales_for_1997> Product_Sales_for_1997 { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Products_Above_Average_Price> Products_Above_Average_Price { get; set; }
         public virtual DbSet<Products_by_Category> Products_by_Category { get; set; }
         public virtual DbSet<Sales_by_Category> Sales_by_Category { get; set; }
@@ -56,5 +55,6 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Summary_of_Sales_by_Year> Summary_of_Sales_by_Year { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
     }
 }

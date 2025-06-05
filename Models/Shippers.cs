@@ -14,11 +14,19 @@ namespace NorthwindMCVdemo.Models
     
     public partial class Shippers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Shippers()
+        {
+            this.Products = new HashSet<Products>();
+        }
+    
         public int ShipperID { get; set; }
         public string CompanyName { get; set; }
         public string Phone { get; set; }
         public int RegionID { get; set; }
     
         public virtual Region Region { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

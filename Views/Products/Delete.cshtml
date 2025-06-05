@@ -13,14 +13,21 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.SupplierID)
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shippers.CompanyName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SupplierID)
+            @Html.DisplayFor(model => model.Shippers.CompanyName)
+
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.CategoryID)
         </dt>
 
@@ -34,7 +41,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.QuantityPerUnit)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.UnitPrice)
@@ -52,7 +59,7 @@
             @Html.DisplayFor(model => model.UnitsInStock)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.UnitsOnOrder)
         </dt>
 
@@ -66,16 +73,16 @@
 
         <dd>
             @Html.DisplayFor(model => model.ReorderLevel)
-        </dd>
+        </dd>*@
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-danger" /> 
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</div>
     }
 </div>

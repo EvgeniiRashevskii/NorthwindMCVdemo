@@ -17,6 +17,7 @@ namespace NorthwindMCVdemo.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            var products = db.Products.Include(p => p.Shippers).ToList();
             return View(db.Products.ToList());
         }
 
@@ -27,26 +28,29 @@ namespace NorthwindMCVdemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+
+            var product = db.Products
+                            .Include(p => p.Shippers) // ← важно!
+                            .FirstOrDefault(p => p.ProductID == id);
+
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+
+            return View(product);
         }
 
         // GET: Products/Create
         public ActionResult Create()
         {
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "CompanyName");
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,ShipperID,UnitPrice,UnitsInStock")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -55,8 +59,10 @@ namespace NorthwindMCVdemo.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "CompanyName", products.ShipperID);
             return View(products);
         }
+
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
@@ -65,28 +71,34 @@ namespace NorthwindMCVdemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+
+            Products product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+
+            ViewBag.ShippersList = new SelectList(db.Shippers, "ShipperID", "CompanyName", product.ShipperID);
+
+
+            return View(product);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ShipperID,UnitPrice,UnitsInStock")] Products product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(products).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(products);
+
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "CompanyName", product.ShipperID);
+
+            return View(product);
         }
 
         // GET: Products/Delete/5

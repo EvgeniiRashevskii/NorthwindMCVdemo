@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="TilausDB3Model.Orders" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="TilausDB3Model.Orders_Qry" Width="1.5" PointX="4.75" PointY="13.75" />
         <EntityTypeShape EntityType="TilausDB3Model.Product_Sales_for_1997" Width="1.5" PointX="13.75" PointY="5.75" />
-        <EntityTypeShape EntityType="TilausDB3Model.Products" Width="1.5" PointX="6.75" PointY="13.75" />
         <EntityTypeShape EntityType="TilausDB3Model.Products_Above_Average_Price" Width="1.5" PointX="13.75" PointY="8.75" />
         <EntityTypeShape EntityType="TilausDB3Model.Products_by_Category" Width="1.5" PointX="8.75" PointY="13.75" />
         <EntityTypeShape EntityType="TilausDB3Model.Sales_by_Category" Width="1.5" PointX="13.75" PointY="11.75" />
@@ -42,6 +41,8 @@
         <AssociationConnector Association="TilausDB3Model.FK_Shippers_Region" />
         <AssociationConnector Association="TilausDB3Model.FK_Tilausrivit_Tilaukset" />
         <AssociationConnector Association="TilausDB3Model.FK_Tilausrivit_Tuotteet" />
+        <EntityTypeShape EntityType="TilausDB3Model.Products" Width="1.5" PointX="12.25" PointY="17.875" />
+        <AssociationConnector Association="TilausDB3Model.FK__Products__Shippe__0B5CAFEA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
