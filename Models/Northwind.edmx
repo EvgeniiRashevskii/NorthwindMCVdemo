@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TilausDB3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TilausDB3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TilausDB3.dbo.Alphabetical list of products' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Alphabetical list of products">
@@ -46,6 +46,37 @@ warning 6002: The table/view 'TilausDB3.dbo.Categories' does not have a primary 
           <Property Name="CategoryName" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="Description" Type="ntext" />
           <Property Name="Picture" Type="image" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TilausDB3.dbo.Category Sales for 1997' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Category Sales for 1997">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CategorySales" Type="money" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TilausDB3.dbo.Current Product List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Current Product List">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TilausDB3.dbo.Customer and Suppliers by City' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer and Suppliers by City">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Relationship" />
+          </Key>
+          <Property Name="City" Type="nvarchar" MaxLength="15" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Relationship" Type="varchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TilausDB3.dbo.CustomerDemographics' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -456,18 +487,6 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="Ahinta" Type="numeric" Precision="7" Scale="2" />
           <Property Name="Kuva" Type="image" />
         </EntityType>
-        <Association Name="FK__Products__Shippe__0B5CAFEA">
-          <End Role="Shippers" Type="Self.Shippers" Multiplicity="1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shippers">
-              <PropertyRef Name="ShipperID" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="ShipperID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Asiakkaat_Postitoimipaikat">
           <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="*" />
@@ -477,6 +496,18 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             </Principal>
             <Dependent Role="Asiakkaat">
               <PropertyRef Name="Postinumero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Shippers">
+          <End Role="Shippers" Type="Self.Shippers" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippers">
+              <PropertyRef Name="ShipperID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ShipperID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -574,6 +605,26 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
     [Categories].[Description] AS [Description], 
     [Categories].[Picture] AS [Picture]
     FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Category Sales for 1997" EntityType="Self.Category Sales for 1997" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Category Sales for 1997].[CategoryName] AS [CategoryName], 
+    [Category Sales for 1997].[CategorySales] AS [CategorySales]
+    FROM [dbo].[Category Sales for 1997] AS [Category Sales for 1997]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Current Product List" EntityType="Self.Current Product List" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Current Product List].[ProductID] AS [ProductID], 
+    [Current Product List].[ProductName] AS [ProductName]
+    FROM [dbo].[Current Product List] AS [Current Product List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Customer and Suppliers by City" EntityType="Self.Customer and Suppliers by City" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer and Suppliers by City].[City] AS [City], 
+    [Customer and Suppliers by City].[CompanyName] AS [CompanyName], 
+    [Customer and Suppliers by City].[ContactName] AS [ContactName], 
+    [Customer and Suppliers by City].[Relationship] AS [Relationship]
+    FROM [dbo].[Customer and Suppliers by City] AS [Customer and Suppliers by City]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -797,13 +848,13 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
     [Territories].[RegionID] AS [RegionID]
     FROM [dbo].[Territories] AS [Territories]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Products__Shippe__0B5CAFEA" Association="Self.FK__Products__Shippe__0B5CAFEA">
-            <End Role="Shippers" EntitySet="Shippers" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
           <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="Self.FK_Asiakkaat_Postitoimipaikat">
             <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Shippers" Association="Self.FK_Products_Shippers">
+            <End Role="Shippers" EntitySet="Shippers" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Shippers_Region" Association="Self.FK_Shippers_Region">
             <End Role="Region" EntitySet="Region" />
@@ -826,72 +877,11 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TilausDB3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TilausDB3Entities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Asiakkaat" EntityType="TilausDB3Model.Asiakkaat" />
-          <EntitySet Name="Henkilot" EntityType="TilausDB3Model.Henkilot" />
-          <EntitySet Name="Logins" EntityType="TilausDB3Model.Logins" />
-          <EntitySet Name="PostiPaikatKT" EntityType="TilausDB3Model.PostiPaikatKT" />
-          <EntitySet Name="Postitoimipaikat" EntityType="TilausDB3Model.Postitoimipaikat" />
-          <EntitySet Name="Region" EntityType="TilausDB3Model.Region" />
-          <EntitySet Name="Shippers" EntityType="TilausDB3Model.Shippers" />
-          <EntitySet Name="Tilaukset" EntityType="TilausDB3Model.Tilaukset" />
-          <EntitySet Name="Tilausrivit" EntityType="TilausDB3Model.Tilausrivit" />
-          <EntitySet Name="Tuotteet" EntityType="TilausDB3Model.Tuotteet" />
-          <EntitySet Name="Alphabetical_list_of_products" EntityType="TilausDB3Model.Alphabetical_list_of_products" />
-          <EntitySet Name="Categories" EntityType="TilausDB3Model.Categories" />
-          <EntitySet Name="Customers" EntityType="TilausDB3Model.Customers" />
-          <EntitySet Name="Employees" EntityType="TilausDB3Model.Employees" />
-          <EntitySet Name="EmployeeTerritories" EntityType="TilausDB3Model.EmployeeTerritories" />
-          <EntitySet Name="Invoices" EntityType="TilausDB3Model.Invoices" />
-          <EntitySet Name="Order_Details" EntityType="TilausDB3Model.Order_Details" />
-          <EntitySet Name="Order_Details_Extended" EntityType="TilausDB3Model.Order_Details_Extended" />
-          <EntitySet Name="Order_Subtotals" EntityType="TilausDB3Model.Order_Subtotals" />
-          <EntitySet Name="Orders" EntityType="TilausDB3Model.Orders" />
-          <EntitySet Name="Orders_Qry" EntityType="TilausDB3Model.Orders_Qry" />
-          <EntitySet Name="Product_Sales_for_1997" EntityType="TilausDB3Model.Product_Sales_for_1997" />
-          <EntitySet Name="Products_Above_Average_Price" EntityType="TilausDB3Model.Products_Above_Average_Price" />
-          <EntitySet Name="Products_by_Category" EntityType="TilausDB3Model.Products_by_Category" />
-          <EntitySet Name="Sales_by_Category" EntityType="TilausDB3Model.Sales_by_Category" />
-          <EntitySet Name="Sales_Totals_by_Amount" EntityType="TilausDB3Model.Sales_Totals_by_Amount" />
-          <EntitySet Name="Summary_of_Sales_by_Quarter" EntityType="TilausDB3Model.Summary_of_Sales_by_Quarter" />
-          <EntitySet Name="Summary_of_Sales_by_Year" EntityType="TilausDB3Model.Summary_of_Sales_by_Year" />
-          <EntitySet Name="Suppliers" EntityType="TilausDB3Model.Suppliers" />
-          <EntitySet Name="Territories" EntityType="TilausDB3Model.Territories" />
-          <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="TilausDB3Model.FK_Asiakkaat_Postitoimipaikat">
-            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
-            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="TilausDB3Model.FK_Tilaukset_Asiakkaat">
-            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
-            <End Role="Tilaukset" EntitySet="Tilaukset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="TilausDB3Model.FK_Tilaukset_Postitoimipaikat">
-            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
-            <End Role="Tilaukset" EntitySet="Tilaukset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shippers_Region" Association="TilausDB3Model.FK_Shippers_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Shippers" EntitySet="Shippers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="TilausDB3Model.FK_Tilausrivit_Tilaukset">
-            <End Role="Tilaukset" EntitySet="Tilaukset" />
-            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilausrivit_Tuotteet" Association="TilausDB3Model.FK_Tilausrivit_Tuotteet">
-            <End Role="Tuotteet" EntitySet="Tuotteet" />
-            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
-          </AssociationSet>
-          <EntitySet Name="Products" EntityType="TilausDB3Model.Products" />
-          <EntitySet Name="CustomerDemographics" EntityType="TilausDB3Model.CustomerDemographics" />
-          <AssociationSet Name="FK__Products__Shippe__0B5CAFEA" Association="TilausDB3Model.FK__Products__Shippe__0B5CAFEA">
-            <End Role="Shippers" EntitySet="Shippers" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -900,8 +890,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Osoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Postitoimipaikat" Relationship="TilausDB3Model.FK_Asiakkaat_Postitoimipaikat" FromRole="Asiakkaat" ToRole="Postitoimipaikat" />
-          <NavigationProperty Name="Tilaukset" Relationship="TilausDB3Model.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
+          <NavigationProperty Name="Postitoimipaikat" Relationship="Self.FK_Asiakkaat_Postitoimipaikat" FromRole="Asiakkaat" ToRole="Postitoimipaikat" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
         </EntityType>
         <EntityType Name="Henkilot">
           <Key>
@@ -920,43 +910,55 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="PostiPaikatKT">
           <Key>
             <PropertyRef Name="Postinumero" />
           </Key>
-          <Property Name="Postinumero" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Postitoimipaikat">
           <Key>
             <PropertyRef Name="Postinumero" />
           </Key>
-          <Property Name="Postinumero" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Asiakkaat" Relationship="TilausDB3Model.FK_Asiakkaat_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Asiakkaat" />
-          <NavigationProperty Name="Tilaukset" Relationship="TilausDB3Model.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
+          <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Asiakkaat_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Asiakkaat" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipperID" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="UnitsInStock" Type="Int16" />
+          <Property Name="Img" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shippers" Relationship="Self.FK_Products_Shippers" FromRole="Products" ToRole="Shippers" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionID" />
           </Key>
           <Property Name="RegionID" Type="Int32" Nullable="false" />
-          <Property Name="RegionDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Shippers" Relationship="TilausDB3Model.FK_Shippers_Region" FromRole="Region" ToRole="Shippers" />
+          <Property Name="RegionDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shippers" Relationship="Self.FK_Shippers_Region" FromRole="Region" ToRole="Shippers" />
         </EntityType>
         <EntityType Name="Shippers">
           <Key>
             <PropertyRef Name="ShipperID" />
           </Key>
           <Property Name="ShipperID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Region" Relationship="TilausDB3Model.FK_Shippers_Region" FromRole="Shippers" ToRole="Region" />
-          <NavigationProperty Name="Products" Relationship="TilausDB3Model.FK__Products__Shippe__0B5CAFEA" FromRole="Shippers" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Shippers" FromRole="Shippers" ToRole="Products" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Shippers_Region" FromRole="Shippers" ToRole="Region" />
         </EntityType>
         <EntityType Name="Tilaukset">
           <Key>
@@ -968,9 +970,9 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Tilauspvm" Type="DateTime" Precision="3" />
           <Property Name="Toimituspvm" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Asiakkaat" Relationship="TilausDB3Model.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
-          <NavigationProperty Name="Postitoimipaikat" Relationship="TilausDB3Model.FK_Tilaukset_Postitoimipaikat" FromRole="Tilaukset" ToRole="Postitoimipaikat" />
-          <NavigationProperty Name="Tilausrivit" Relationship="TilausDB3Model.FK_Tilausrivit_Tilaukset" FromRole="Tilaukset" ToRole="Tilausrivit" />
+          <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
+          <NavigationProperty Name="Postitoimipaikat" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Tilaukset" ToRole="Postitoimipaikat" />
+          <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tilaukset" FromRole="Tilaukset" ToRole="Tilausrivit" />
         </EntityType>
         <EntityType Name="Tilausrivit">
           <Key>
@@ -981,8 +983,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="TuoteID" Type="Int32" />
           <Property Name="Maara" Type="Int32" />
           <Property Name="Ahinta" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="Tilaukset" Relationship="TilausDB3Model.FK_Tilausrivit_Tilaukset" FromRole="Tilausrivit" ToRole="Tilaukset" />
-          <NavigationProperty Name="Tuotteet" Relationship="TilausDB3Model.FK_Tilausrivit_Tuotteet" FromRole="Tilausrivit" ToRole="Tuotteet" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilausrivit_Tilaukset" FromRole="Tilausrivit" ToRole="Tilaukset" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tilausrivit_Tuotteet" FromRole="Tilausrivit" ToRole="Tuotteet" />
         </EntityType>
         <EntityType Name="Tuotteet">
           <Key>
@@ -992,7 +994,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Ahinta" Type="Decimal" Precision="7" Scale="2" />
           <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Tilausrivit" Relationship="TilausDB3Model.FK_Tilausrivit_Tuotteet" FromRole="Tuotteet" ToRole="Tilausrivit" />
+          <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tuotteet" FromRole="Tuotteet" ToRole="Tilausrivit" />
         </EntityType>
         <EntityType Name="Alphabetical_list_of_products">
           <Key>
@@ -1002,7 +1004,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="CategoryName" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1011,7 +1013,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="UnitsOnOrder" Type="Int16" />
           <Property Name="ReorderLevel" Type="Int16" />
           <Property Name="Discontinued" Type="Boolean" Nullable="false" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -1019,17 +1021,49 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="CategoryName" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Category_Sales_for_1997">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategorySales" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Current_Product_List">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer_and_Suppliers_by_City">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Relationship" />
+          </Key>
+          <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerDemographics">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CustomerDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="CustomerID" />
             <PropertyRef Name="CompanyName" />
           </Key>
-          <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
@@ -1047,8 +1081,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="FirstName" />
           </Key>
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="TitleOfCourtesy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
@@ -1071,7 +1105,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="TerritoryID" />
           </Key>
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="TerritoryID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TerritoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Invoices">
           <Key>
@@ -1092,21 +1126,21 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Salesperson" Type="String" Nullable="false" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Name="Salesperson" Type="String" MaxLength="31" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="RequiredDate" Type="DateTime" Precision="3" />
           <Property Name="ShippedDate" Type="DateTime" Precision="3" />
-          <Property Name="ShipperName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ShipperName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
           <Property Name="Discount" Type="Single" Nullable="false" />
           <Property Name="ExtendedPrice" Type="Decimal" Precision="19" Scale="4" />
@@ -1122,7 +1156,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
           <Property Name="Discount" Type="Single" Nullable="false" />
         </EntityType>
@@ -1137,8 +1171,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
           <Property Name="Discount" Type="Single" Nullable="false" />
           <Property Name="ExtendedPrice" Type="Decimal" Precision="19" Scale="4" />
@@ -1188,7 +1222,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
@@ -1200,15 +1234,15 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="CategoryName" />
             <PropertyRef Name="ProductName" />
           </Key>
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductSales" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Products_Above_Average_Price">
           <Key>
             <PropertyRef Name="ProductName" />
           </Key>
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Products_by_Category">
@@ -1217,8 +1251,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="ProductName" />
             <PropertyRef Name="Discontinued" />
           </Key>
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="UnitsInStock" Type="Int16" />
           <Property Name="Discontinued" Type="Boolean" Nullable="false" />
@@ -1230,8 +1264,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="ProductName" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductSales" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Sales_Totals_by_Amount">
@@ -1241,7 +1275,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </Key>
           <Property Name="SaleAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ShippedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Summary_of_Sales_by_Quarter">
@@ -1266,7 +1300,7 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="CompanyName" />
           </Key>
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
@@ -1284,13 +1318,13 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             <PropertyRef Name="TerritoryDescription" />
             <PropertyRef Name="RegionID" />
           </Key>
-          <Property Name="TerritoryID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TerritoryDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="TerritoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TerritoryDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Asiakkaat_Postitoimipaikat">
-          <End Type="TilausDB3Model.Postitoimipaikat" Role="Postitoimipaikat" Multiplicity="0..1" />
-          <End Type="TilausDB3Model.Asiakkaat" Role="Asiakkaat" Multiplicity="*" />
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Postitoimipaikat">
               <PropertyRef Name="Postinumero" />
@@ -1301,8 +1335,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tilaukset_Asiakkaat">
-          <End Type="TilausDB3Model.Asiakkaat" Role="Asiakkaat" Multiplicity="0..1" />
-          <End Type="TilausDB3Model.Tilaukset" Role="Tilaukset" Multiplicity="*" />
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Asiakkaat">
               <PropertyRef Name="AsiakasID" />
@@ -1313,8 +1347,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tilaukset_Postitoimipaikat">
-          <End Type="TilausDB3Model.Postitoimipaikat" Role="Postitoimipaikat" Multiplicity="0..1" />
-          <End Type="TilausDB3Model.Tilaukset" Role="Tilaukset" Multiplicity="*" />
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Postitoimipaikat">
               <PropertyRef Name="Postinumero" />
@@ -1324,9 +1358,21 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Shippers">
+          <End Role="Shippers" Type="Self.Shippers" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippers">
+              <PropertyRef Name="ShipperID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ShipperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Shippers_Region">
-          <End Type="TilausDB3Model.Region" Role="Region" Multiplicity="1" />
-          <End Type="TilausDB3Model.Shippers" Role="Shippers" Multiplicity="*" />
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Shippers" Type="Self.Shippers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="RegionID" />
@@ -1337,8 +1383,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tilausrivit_Tilaukset">
-          <End Type="TilausDB3Model.Tilaukset" Role="Tilaukset" Multiplicity="0..1" />
-          <End Type="TilausDB3Model.Tilausrivit" Role="Tilausrivit" Multiplicity="*" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="0..1" />
+          <End Role="Tilausrivit" Type="Self.Tilausrivit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tilaukset">
               <PropertyRef Name="TilausID" />
@@ -1349,8 +1395,8 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tilausrivit_Tuotteet">
-          <End Type="TilausDB3Model.Tuotteet" Role="Tuotteet" Multiplicity="0..1" />
-          <End Type="TilausDB3Model.Tilausrivit" Role="Tilausrivit" Multiplicity="*" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
+          <End Role="Tilausrivit" Type="Self.Tilausrivit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tuotteet">
               <PropertyRef Name="TuoteID" />
@@ -1360,438 +1406,498 @@ warning 6002: The table/view 'TilausDB3.dbo.Territories' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Products">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ShipperID" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="9" Scale="2" />
-          <Property Name="UnitsInStock" Type="Int16" />
-          <Property Name="Img" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Shippers" Relationship="TilausDB3Model.FK__Products__Shippe__0B5CAFEA" FromRole="Products" ToRole="Shippers" />
-        </EntityType>
-        <EntityType Name="CustomerDemographics">
-          <Key>
-            <PropertyRef Name="CustomerTypeID" />
-          </Key>
-          <Property Name="CustomerTypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CustomerDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK__Products__Shippe__0B5CAFEA">
-          <End Type="TilausDB3Model.Shippers" Role="Shippers" Multiplicity="1" />
-          <End Type="TilausDB3Model.Products" Role="Products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shippers">
-              <PropertyRef Name="ShipperID" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="ShipperID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityContainer Name="TilausDB3Entities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
+          <EntitySet Name="Henkilot" EntityType="Self.Henkilot" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="PostiPaikatKT" EntityType="Self.PostiPaikatKT" />
+          <EntitySet Name="Postitoimipaikat" EntityType="Self.Postitoimipaikat" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Shippers" EntityType="Self.Shippers" />
+          <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" />
+          <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
+          <EntitySet Name="Alphabetical_list_of_products" EntityType="Self.Alphabetical_list_of_products" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Category_Sales_for_1997" EntityType="Self.Category_Sales_for_1997" />
+          <EntitySet Name="Current_Product_List" EntityType="Self.Current_Product_List" />
+          <EntitySet Name="Customer_and_Suppliers_by_City" EntityType="Self.Customer_and_Suppliers_by_City" />
+          <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="EmployeeTerritories" EntityType="Self.EmployeeTerritories" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+          <EntitySet Name="Order_Details_Extended" EntityType="Self.Order_Details_Extended" />
+          <EntitySet Name="Order_Subtotals" EntityType="Self.Order_Subtotals" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Orders_Qry" EntityType="Self.Orders_Qry" />
+          <EntitySet Name="Product_Sales_for_1997" EntityType="Self.Product_Sales_for_1997" />
+          <EntitySet Name="Products_Above_Average_Price" EntityType="Self.Products_Above_Average_Price" />
+          <EntitySet Name="Products_by_Category" EntityType="Self.Products_by_Category" />
+          <EntitySet Name="Sales_by_Category" EntityType="Self.Sales_by_Category" />
+          <EntitySet Name="Sales_Totals_by_Amount" EntityType="Self.Sales_Totals_by_Amount" />
+          <EntitySet Name="Summary_of_Sales_by_Quarter" EntityType="Self.Summary_of_Sales_by_Quarter" />
+          <EntitySet Name="Summary_of_Sales_by_Year" EntityType="Self.Summary_of_Sales_by_Year" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <EntitySet Name="Territories" EntityType="Self.Territories" />
+          <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="Self.FK_Asiakkaat_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="Self.FK_Tilaukset_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Shippers" Association="Self.FK_Products_Shippers">
+            <End Role="Shippers" EntitySet="Shippers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shippers_Region" Association="Self.FK_Shippers_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Shippers" EntitySet="Shippers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="Self.FK_Tilausrivit_Tilaukset">
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilausrivit_Tuotteet" Association="Self.FK_Tilausrivit_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TilausDB3ModelStoreContainer" CdmEntityContainer="TilausDB3Entities2">
+        <EntityContainerMapping StorageEntityContainer="TilausDB3ModelStoreContainer" CdmEntityContainer="TilausDB3Entities4">
           <EntitySetMapping Name="Asiakkaat">
             <EntityTypeMapping TypeName="TilausDB3Model.Asiakkaat">
               <MappingFragment StoreEntitySet="Asiakkaat">
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Henkilot">
             <EntityTypeMapping TypeName="TilausDB3Model.Henkilot">
               <MappingFragment StoreEntitySet="Henkilot">
-                <ScalarProperty Name="Sahkoposti" ColumnName="Sahkoposti" />
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-                <ScalarProperty Name="Esimies" ColumnName="Esimies" />
-                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
-                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
-                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
                 <ScalarProperty Name="Henkilo_id" ColumnName="Henkilo_id" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
+                <ScalarProperty Name="Esimies" ColumnName="Esimies" />
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Sahkoposti" ColumnName="Sahkoposti" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="TilausDB3Model.Logins">
               <MappingFragment StoreEntitySet="Logins">
-                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PostiPaikatKT">
             <EntityTypeMapping TypeName="TilausDB3Model.PostiPaikatKT">
               <MappingFragment StoreEntitySet="PostiPaikatKT">
-                <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
                 <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Postitoimipaikat">
             <EntityTypeMapping TypeName="TilausDB3Model.Postitoimipaikat">
               <MappingFragment StoreEntitySet="Postitoimipaikat">
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
                 <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Region">
-            <EntityTypeMapping TypeName="TilausDB3Model.Region">
-              <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="RegionDescription" ColumnName="RegionDescription" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Shippers">
-            <EntityTypeMapping TypeName="TilausDB3Model.Shippers">
-              <MappingFragment StoreEntitySet="Shippers">
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tilaukset">
-            <EntityTypeMapping TypeName="TilausDB3Model.Tilaukset">
-              <MappingFragment StoreEntitySet="Tilaukset">
-                <ScalarProperty Name="Toimituspvm" ColumnName="Toimituspvm" />
-                <ScalarProperty Name="Tilauspvm" ColumnName="Tilauspvm" />
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-                <ScalarProperty Name="Toimitusosoite" ColumnName="Toimitusosoite" />
-                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
-                <ScalarProperty Name="TilausID" ColumnName="TilausID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tilausrivit">
-            <EntityTypeMapping TypeName="TilausDB3Model.Tilausrivit">
-              <MappingFragment StoreEntitySet="Tilausrivit">
-                <ScalarProperty Name="Ahinta" ColumnName="Ahinta" />
-                <ScalarProperty Name="Maara" ColumnName="Maara" />
-                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
-                <ScalarProperty Name="TilausID" ColumnName="TilausID" />
-                <ScalarProperty Name="TilausriviID" ColumnName="TilausriviID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tuotteet">
-            <EntityTypeMapping TypeName="TilausDB3Model.Tuotteet">
-              <MappingFragment StoreEntitySet="Tuotteet">
-                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
-                <ScalarProperty Name="Ahinta" ColumnName="Ahinta" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
-                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Alphabetical_list_of_products">
-            <EntityTypeMapping TypeName="TilausDB3Model.Alphabetical_list_of_products">
-              <MappingFragment StoreEntitySet="Alphabetical list of products">
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
-                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
-                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="TilausDB3Model.Categories">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="TilausDB3Model.Customers">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="TilausDB3Model.Employees">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
-                <ScalarProperty Name="ReportsTo" ColumnName="ReportsTo" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
-                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="TitleOfCourtesy" ColumnName="TitleOfCourtesy" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeTerritories">
-            <EntityTypeMapping TypeName="TilausDB3Model.EmployeeTerritories">
-              <MappingFragment StoreEntitySet="EmployeeTerritories">
-                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Invoices">
-            <EntityTypeMapping TypeName="TilausDB3Model.Invoices">
-              <MappingFragment StoreEntitySet="Invoices">
-                <ScalarProperty Name="Freight" ColumnName="Freight" />
-                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="Salesperson" ColumnName="Salesperson" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
-                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Order_Details">
-            <EntityTypeMapping TypeName="TilausDB3Model.Order_Details">
-              <MappingFragment StoreEntitySet="Order Details">
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Order_Details_Extended">
-            <EntityTypeMapping TypeName="TilausDB3Model.Order_Details_Extended">
-              <MappingFragment StoreEntitySet="Order Details Extended">
-                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Order_Subtotals">
-            <EntityTypeMapping TypeName="TilausDB3Model.Order_Subtotals">
-              <MappingFragment StoreEntitySet="Order Subtotals">
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="TilausDB3Model.Orders">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
-                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
-                <ScalarProperty Name="Freight" ColumnName="Freight" />
-                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders_Qry">
-            <EntityTypeMapping TypeName="TilausDB3Model.Orders_Qry">
-              <MappingFragment StoreEntitySet="Orders Qry">
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
-                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
-                <ScalarProperty Name="Freight" ColumnName="Freight" />
-                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product_Sales_for_1997">
-            <EntityTypeMapping TypeName="TilausDB3Model.Product_Sales_for_1997">
-              <MappingFragment StoreEntitySet="Product Sales for 1997">
-                <ScalarProperty Name="ProductSales" ColumnName="ProductSales" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products_Above_Average_Price">
-            <EntityTypeMapping TypeName="TilausDB3Model.Products_Above_Average_Price">
-              <MappingFragment StoreEntitySet="Products Above Average Price">
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products_by_Category">
-            <EntityTypeMapping TypeName="TilausDB3Model.Products_by_Category">
-              <MappingFragment StoreEntitySet="Products by Category">
-                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sales_by_Category">
-            <EntityTypeMapping TypeName="TilausDB3Model.Sales_by_Category">
-              <MappingFragment StoreEntitySet="Sales by Category">
-                <ScalarProperty Name="ProductSales" ColumnName="ProductSales" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sales_Totals_by_Amount">
-            <EntityTypeMapping TypeName="TilausDB3Model.Sales_Totals_by_Amount">
-              <MappingFragment StoreEntitySet="Sales Totals by Amount">
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="SaleAmount" ColumnName="SaleAmount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Summary_of_Sales_by_Quarter">
-            <EntityTypeMapping TypeName="TilausDB3Model.Summary_of_Sales_by_Quarter">
-              <MappingFragment StoreEntitySet="Summary of Sales by Quarter">
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Summary_of_Sales_by_Year">
-            <EntityTypeMapping TypeName="TilausDB3Model.Summary_of_Sales_by_Year">
-              <MappingFragment StoreEntitySet="Summary of Sales by Year">
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="TilausDB3Model.Suppliers">
-              <MappingFragment StoreEntitySet="Suppliers">
-                <ScalarProperty Name="HomePage" ColumnName="HomePage" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Territories">
-            <EntityTypeMapping TypeName="TilausDB3Model.Territories">
-              <MappingFragment StoreEntitySet="Territories">
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="TerritoryDescription" ColumnName="TerritoryDescription" />
-                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="TilausDB3Model.Products">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Img" ColumnName="Img" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="TilausDB3Model.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="RegionDescription" ColumnName="RegionDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippers">
+            <EntityTypeMapping TypeName="TilausDB3Model.Shippers">
+              <MappingFragment StoreEntitySet="Shippers">
+                <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tilaukset">
+            <EntityTypeMapping TypeName="TilausDB3Model.Tilaukset">
+              <MappingFragment StoreEntitySet="Tilaukset">
+                <ScalarProperty Name="TilausID" ColumnName="TilausID" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Toimitusosoite" ColumnName="Toimitusosoite" />
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Tilauspvm" ColumnName="Tilauspvm" />
+                <ScalarProperty Name="Toimituspvm" ColumnName="Toimituspvm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tilausrivit">
+            <EntityTypeMapping TypeName="TilausDB3Model.Tilausrivit">
+              <MappingFragment StoreEntitySet="Tilausrivit">
+                <ScalarProperty Name="TilausriviID" ColumnName="TilausriviID" />
+                <ScalarProperty Name="TilausID" ColumnName="TilausID" />
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="Maara" ColumnName="Maara" />
+                <ScalarProperty Name="Ahinta" ColumnName="Ahinta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuotteet">
+            <EntityTypeMapping TypeName="TilausDB3Model.Tuotteet">
+              <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+                <ScalarProperty Name="Ahinta" ColumnName="Ahinta" />
+                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alphabetical_list_of_products">
+            <EntityTypeMapping TypeName="TilausDB3Model.Alphabetical_list_of_products">
+              <MappingFragment StoreEntitySet="Alphabetical list of products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TilausDB3Model.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Sales_for_1997">
+            <EntityTypeMapping TypeName="TilausDB3Model.Category_Sales_for_1997">
+              <MappingFragment StoreEntitySet="Category Sales for 1997">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategorySales" ColumnName="CategorySales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Current_Product_List">
+            <EntityTypeMapping TypeName="TilausDB3Model.Current_Product_List">
+              <MappingFragment StoreEntitySet="Current Product List">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_and_Suppliers_by_City">
+            <EntityTypeMapping TypeName="TilausDB3Model.Customer_and_Suppliers_by_City">
+              <MappingFragment StoreEntitySet="Customer and Suppliers by City">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomerDemographics">
             <EntityTypeMapping TypeName="TilausDB3Model.CustomerDemographics">
               <MappingFragment StoreEntitySet="CustomerDemographics">
-                <ScalarProperty Name="CustomerDesc" ColumnName="CustomerDesc" />
                 <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+                <ScalarProperty Name="CustomerDesc" ColumnName="CustomerDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="TilausDB3Model.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TilausDB3Model.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TitleOfCourtesy" ColumnName="TitleOfCourtesy" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ReportsTo" ColumnName="ReportsTo" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTerritories">
+            <EntityTypeMapping TypeName="TilausDB3Model.EmployeeTerritories">
+              <MappingFragment StoreEntitySet="EmployeeTerritories">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="TilausDB3Model.Invoices">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Salesperson" ColumnName="Salesperson" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="TilausDB3Model.Order_Details">
+              <MappingFragment StoreEntitySet="Order Details">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details_Extended">
+            <EntityTypeMapping TypeName="TilausDB3Model.Order_Details_Extended">
+              <MappingFragment StoreEntitySet="Order Details Extended">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Subtotals">
+            <EntityTypeMapping TypeName="TilausDB3Model.Order_Subtotals">
+              <MappingFragment StoreEntitySet="Order Subtotals">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="TilausDB3Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders_Qry">
+            <EntityTypeMapping TypeName="TilausDB3Model.Orders_Qry">
+              <MappingFragment StoreEntitySet="Orders Qry">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Sales_for_1997">
+            <EntityTypeMapping TypeName="TilausDB3Model.Product_Sales_for_1997">
+              <MappingFragment StoreEntitySet="Product Sales for 1997">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductSales" ColumnName="ProductSales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_Above_Average_Price">
+            <EntityTypeMapping TypeName="TilausDB3Model.Products_Above_Average_Price">
+              <MappingFragment StoreEntitySet="Products Above Average Price">
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_by_Category">
+            <EntityTypeMapping TypeName="TilausDB3Model.Products_by_Category">
+              <MappingFragment StoreEntitySet="Products by Category">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_by_Category">
+            <EntityTypeMapping TypeName="TilausDB3Model.Sales_by_Category">
+              <MappingFragment StoreEntitySet="Sales by Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductSales" ColumnName="ProductSales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Totals_by_Amount">
+            <EntityTypeMapping TypeName="TilausDB3Model.Sales_Totals_by_Amount">
+              <MappingFragment StoreEntitySet="Sales Totals by Amount">
+                <ScalarProperty Name="SaleAmount" ColumnName="SaleAmount" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Summary_of_Sales_by_Quarter">
+            <EntityTypeMapping TypeName="TilausDB3Model.Summary_of_Sales_by_Quarter">
+              <MappingFragment StoreEntitySet="Summary of Sales by Quarter">
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Summary_of_Sales_by_Year">
+            <EntityTypeMapping TypeName="TilausDB3Model.Summary_of_Sales_by_Year">
+              <MappingFragment StoreEntitySet="Summary of Sales by Year">
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="TilausDB3Model.Suppliers">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="HomePage" ColumnName="HomePage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Territories">
+            <EntityTypeMapping TypeName="TilausDB3Model.Territories">
+              <MappingFragment StoreEntitySet="Territories">
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="TerritoryDescription" ColumnName="TerritoryDescription" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

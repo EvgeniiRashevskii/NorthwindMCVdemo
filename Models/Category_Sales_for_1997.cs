@@ -12,15 +12,9 @@ namespace NorthwindMCVdemo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Category_Sales_for_1997
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public int ShipperID { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<short> UnitsInStock { get; set; }
-        public string Img { get; set; }
-    
-        public virtual Shippers Shippers { get; set; }
+        public string CategoryName { get; set; }
+        public Nullable<decimal> CategorySales { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace NorthwindMCVdemo.Controllers
 {
     public class EmployeesController : BaseController
     {
-        private TilausDB3Entities2 db = new TilausDB3Entities2();
+        private TilausDB3Entities4 db = new TilausDB3Entities4();
 
         // GET: Employees
         public ActionResult Index()

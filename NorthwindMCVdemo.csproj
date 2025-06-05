@@ -130,115 +130,124 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Alphabetical_list_of_products.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Asiakkaat.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categories.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category_Sales_for_1997.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Current_Product_List.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDemographics.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customers.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer_and_Suppliers_by_City.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employees.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeTerritories.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Henkilot.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Invoices.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Logins.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NorthwindModel.Context.cs">
+    <Compile Include="Models\Northwind.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindModel.Context.tt</DependentUpon>
+      <DependentUpon>Northwind.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NorthwindModel.cs">
+    <Compile Include="Models\Northwind.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NorthwindModel.Designer.cs">
+    <Compile Include="Models\Northwind.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindModel.edmx</DependentUpon>
+      <DependentUpon>Northwind.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Orders.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Orders_Qry.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order_Details.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order_Details_Extended.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order_Subtotals.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostiPaikatKT.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Postitoimipaikat.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Products.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Products_Above_Average_Price.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Products_by_Category.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product_Sales_for_1997.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Region.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sales_by_Category.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sales_Totals_by_Amount.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shippers.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Summary_of_Sales_by_Quarter.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Summary_of_Sales_by_Year.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suppliers.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Territories.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tilaukset.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tilausrivit.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tuotteet.cs">
-      <DependentUpon>NorthwindModel.tt</DependentUpon>
+      <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -262,22 +271,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\NorthwindModel.Context.tt">
+    <Content Include="Models\Northwind.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NorthwindModel.edmx</DependentUpon>
-      <LastGenOutput>NorthwindModel.Context.cs</LastGenOutput>
+      <DependentUpon>Northwind.edmx</DependentUpon>
+      <LastGenOutput>Northwind.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\NorthwindModel.tt">
+    <Content Include="Models\Northwind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NorthwindModel.edmx</DependentUpon>
-      <LastGenOutput>NorthwindModel.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\NorthwindModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NorthwindModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NorthwindModel.edmx.diagram">
-      <DependentUpon>NorthwindModel.edmx</DependentUpon>
+      <DependentUpon>Northwind.edmx</DependentUpon>
+      <LastGenOutput>Northwind.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -307,6 +309,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Northwind.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Northwind.edmx.diagram">
+      <DependentUpon>Northwind.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

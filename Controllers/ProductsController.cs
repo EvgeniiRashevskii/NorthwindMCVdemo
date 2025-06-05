@@ -12,7 +12,7 @@ namespace NorthwindMCVdemo.Controllers
 {
     public class ProductsController : BaseController
     {
-        private TilausDB3Entities2 db = new TilausDB3Entities2();
+        private TilausDB3Entities4 db = new TilausDB3Entities4();
 
         // GET: Products
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace NorthwindMCVdemo.Controllers
             }
 
             var product = db.Products
-                            .Include(p => p.Shippers) // ← важно!
+                            .Include(p => p.Shippers) 
                             .FirstOrDefault(p => p.ProductID == id);
 
             if (product == null)

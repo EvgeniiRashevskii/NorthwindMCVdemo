@@ -18,7 +18,7 @@ namespace NorthwindMCVdemo.Controllers
 
         public ActionResult Authorize(Logins LoginModel)
         {
-            TilausDB3Entities2 db = new TilausDB3Entities2();
+            TilausDB3Entities4 db = new TilausDB3Entities4();
 
             var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginModel.UserName && x.PassWord == LoginModel.PassWord);
             if (LoggedUser != null)

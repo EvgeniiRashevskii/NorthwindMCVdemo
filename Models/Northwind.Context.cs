@@ -13,10 +13,10 @@ namespace NorthwindMCVdemo.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TilausDB3Entities2 : DbContext
+    public partial class TilausDB3Entities4 : DbContext
     {
-        public TilausDB3Entities2()
-            : base("name=TilausDB3Entities2")
+        public TilausDB3Entities4()
+            : base("name=TilausDB3Entities4")
         {
         }
     
@@ -30,6 +30,7 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<PostiPaikatKT> PostiPaikatKT { get; set; }
         public virtual DbSet<Postitoimipaikat> Postitoimipaikat { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Tilaukset> Tilaukset { get; set; }
@@ -37,6 +38,10 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
         public virtual DbSet<Alphabetical_list_of_products> Alphabetical_list_of_products { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Category_Sales_for_1997> Category_Sales_for_1997 { get; set; }
+        public virtual DbSet<Current_Product_List> Current_Product_List { get; set; }
+        public virtual DbSet<Customer_and_Suppliers_by_City> Customer_and_Suppliers_by_City { get; set; }
+        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<EmployeeTerritories> EmployeeTerritories { get; set; }
@@ -55,7 +60,5 @@ namespace NorthwindMCVdemo.Models
         public virtual DbSet<Summary_of_Sales_by_Year> Summary_of_Sales_by_Year { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
     }
 }

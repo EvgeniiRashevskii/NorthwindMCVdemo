@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e7d75104ccf64bbabc8ebca86363ef11" Name="Diagram1">
+        <EntityTypeShape EntityType="TilausDB3Model.Asiakkaat" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Henkilot" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Logins" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.PostiPaikatKT" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Postitoimipaikat" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Products" Width="1.5" PointX="12.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Region" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Shippers" Width="1.5" PointX="10" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Tilaukset" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Tilausrivit" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Tuotteet" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Alphabetical_list_of_products" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Categories" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Category_Sales_for_1997" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Current_Product_List" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Customer_and_Suppliers_by_City" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.CustomerDemographics" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Customers" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Employees" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.EmployeeTerritories" Width="1.5" PointX="8.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Invoices" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Order_Details" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Order_Details_Extended" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Order_Subtotals" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Orders" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Orders_Qry" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Product_Sales_for_1997" Width="1.5" PointX="14.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Products_Above_Average_Price" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Products_by_Category" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Sales_by_Category" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Sales_Totals_by_Amount" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Summary_of_Sales_by_Quarter" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Summary_of_Sales_by_Year" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Suppliers" Width="1.5" PointX="16.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilausDB3Model.Territories" Width="1.5" PointX="16.75" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="TilausDB3Model.FK_Asiakkaat_Postitoimipaikat" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Tilaukset_Asiakkaat" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Tilaukset_Postitoimipaikat" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Products_Shippers" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Shippers_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Tilausrivit_Tilaukset" ManuallyRouted="false" />
+        <AssociationConnector Association="TilausDB3Model.FK_Tilausrivit_Tuotteet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
